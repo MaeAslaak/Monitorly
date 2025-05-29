@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monitorly - Surveillez vos serveurs intelligemment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .fade-up {
+            animation: fadeUp 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .network-sphere {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            animation: rotate 120s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .sphere-outline {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #00C2A8;
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .network-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00C2A8, transparent);
+            transform-origin: left center;
+            opacity: 0.4;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .network-node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #00C2A8;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00C2A8;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px #00C2A8;
+                transform: scale(1);
+            }
+
+            to {
+                box-shadow: 0 0 15px #00C2A8, 0 0 25px #00C2A8;
+                transform: scale(1.2);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Lignes de réseau créant une sphère 3D */
+        .meridian {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            border: 1px solid #00C2A8;
+            border-radius: 50%;
+            opacity: 0.2;
+        }
+
+        .meridian:nth-child(1) {
+            transform: translate(-50%, -50%) rotateY(0deg);
+        }
+
+        .meridian:nth-child(2) {
+            transform: translate(-50%, -50%) rotateY(30deg);
+        }
+
+        .meridian:nth-child(3) {
+            transform: translate(-50%, -50%) rotateY(60deg);
+        }
+
+        .meridian:nth-child(4) {
+            transform: translate(-50%, -50%) rotateY(90deg);
+        }
+
+        .meridian:nth-child(5) {
+            transform: translate(-50%, -50%) rotateY(120deg);
+        }
+
+        .meridian:nth-child(6) {
+            transform: translate(-50%, -50%) rotateY(150deg);
+        }
+
+        .latitude {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 1px solid #00C2A8;
+            border-radius: 50%;
+            opacity: 0.15;
+        }
+
+        .lat-1 {
+            width: 500px;
+            height: 500px;
+            transform: translate(-50%, -50%);
+        }
+
+        .lat-2 {
+            width: 400px;
+            height: 400px;
+            transform: translate(-50%, -50%);
+        }
+
+        .lat-3 {
+            width: 300px;
+            height: 300px;
+            transform: translate(-50%, -50%);
+        }
+
+        .lat-4 {
+            width: 200px;
+            height: 200px;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-950 text-white">
+    <!-- Header -->
+    <header class="flex justify-between items-center p-6 border-b border-gray-800">
+        <div class="h-10 w-32 bg-[#00C2A8] rounded flex items-center justify-center text-black font-bold">Monitorly
+        </div>
+        <nav class="hidden md:flex space-x-6 text-gray-300">
+            <a href="#features" class="hover:text-white">Fonctionnalités</a>
+            <a href="#metrics" class="hover:text-white">Métriques</a>
+            <a href="#pricing" class="hover:text-white">Tarifs</a>
+            <a href="#faq" class="hover:text-white">FAQ</a>
+        </nav>
+        <button class="bg-[#00C2A8] text-black px-4 py-2 rounded-md font-semibold hover:opacity-90 transition">Essai
+            gratuit</button>
+    </header>
+
+<!-- Hero -->
+<section
+    class="px-6 md:px-20 py-24 text-center fade-up relative overflow-hidden min-h-[80vh] flex items-center justify-center">
+    <!-- Sphère réseau en arrière-plan -->
+    <div class="network-sphere">
+        <div class="sphere-outline"></div>
+        <div class="meridian"></div>
+        <div class="meridian"></div>
+        <div class="meridian"></div>
+        <div class="meridian"></div>
+        <div class="meridian"></div>
+        <div class="meridian"></div>
+        <div class="latitude lat-1"></div>
+        <div class="latitude lat-2"></div>
+        <div class="latitude lat-3"></div>
+        <div class="latitude lat-4"></div>
+        <div class="network-line"
+            style="top: 50%; left: 50%; width: 250px; transform: translate(-50%, -50%) rotate(0deg);"></div>
+        <div class="network-line"
+            style="top: 50%; left: 50%; width: 230px; transform: translate(-50%, -50%) rotate(30deg);"></div>
+        <div class="network-line"
+            style="top: 50%; left: 50%; width: 240px; transform: translate(-50%, -50%) rotate(60deg);"></div>
+        <div class="network-line"
+            style="top: 50%; left: 50%; width: 220px; transform: translate(-50%, -50%) rotate(90deg);"></div>
+        <div class="network-line"
+            style="top: 50%; left: 50%; width: 235px; transform: translate(-50%, -50%) rotate(120deg);"></div>
+        <div class="network-line"
+            style="top: 50%; left: 50%; width: 225px; transform: translate(-50%, -50%) rotate(150deg);"></div>
+        <div class="network-line"
+            style="top: 50%; left: 50%; width: 245px; transform: translate(-50%, -50%) rotate(180deg);"></div>
+        <div class="network-line"
+            style="top: 50%; left: 50%; width: 215px; transform: translate(-50%, -50%) rotate(210deg);"></div>
+        <div class="network-line"
+            style="top: 50%; left: 50%; width: 240px; transform: translate(-50%, -50%) rotate(240deg);"></div>
+        <div class="network-line"
+            style="top: 50%; left: 50%; width: 230px; transform: translate(-50%, -50%) rotate(270deg);"></div>
+        <div class="network-line"
+            style="top: 50%; left: 50%; width: 220px; transform: translate(-50%, -50%) rotate(300deg);"></div>
+        <div class="network-line"
+            style="top: 50%; left: 50%; width: 235px; transform: translate(-50%, -50%) rotate(330deg);"></div>
+
+        <div class="network-line" style="top: 20%; left: 10%; width: 180px; transform: rotate(45deg);"></div>
+        <div class="network-line" style="top: 25%; right: 15%; width: 160px; transform: rotate(-30deg);"></div>
+        <div class="network-line" style="top: 30%; left: 20%; width: 200px; transform: rotate(75deg);"></div>
+        <div class="network-line" style="top: 35%; right: 25%; width: 140px; transform: rotate(-60deg);"></div>
+        <div class="network-line" style="bottom: 30%; left: 15%; width: 170px; transform: rotate(15deg);"></div>
+        <div class="network-line" style="bottom: 25%; right: 20%; width: 190px; transform: rotate(-45deg);"></div>
+        <div class="network-line" style="top: 40%; left: 30%; width: 150px; transform: rotate(105deg);"></div>
+        <div class="network-line" style="top: 45%; right: 10%; width: 180px; transform: rotate(-15deg);"></div>
+        <div class="network-line" style="bottom: 40%; left: 25%; width: 160px; transform: rotate(60deg);"></div>
+        <div class="network-line" style="bottom: 35%; right: 30%; width: 170px; transform: rotate(-75deg);"></div>
+
+        <div class="network-node" style="top: 15%; left: 20%;"></div>
+        <div class="network-node" style="top: 20%; right: 25%;"></div>
+        <div class="network-node" style="top: 30%; left: 15%;"></div>
+        <div class="network-node" style="top: 35%; right: 20%;"></div>
+        <div class="network-node" style="top: 45%; left: 25%;"></div>
+        <div class="network-node" style="top: 50%; right: 15%;"></div>
+        <div class="network-node" style="top: 55%; left: 30%;"></div>
+        <div class="network-node" style="top: 65%; right: 25%;"></div>
+        <div class="network-node" style="bottom: 35%; left: 20%;"></div>
+        <div class="network-node" style="bottom: 30%; right: 30%;"></div>
+        <div class="network-node" style="bottom: 25%; left: 35%;"></div>
+        <div class="network-node" style="bottom: 20%; right: 15%;"></div>
+        <div class="network-node" style="top: 25%; left: 50%;"></div>
+        <div class="network-node" style="top: 40%; right: 45%;"></div>
+        <div class="network-node" style="bottom: 40%; left: 45%;"></div>
+        <div class="network-node" style="bottom: 45%; right: 50%;"></div>
+        <div class="network-node" style="top: 60%; left: 40%;"></div>
+        <div class="network-node" style="top: 70%; right: 35%;"></div>
+        <div class="network-node" style="top: 50%; left: 50%;"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="hero-content">
+        <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">Surveillez votre infrastructure <span
+                class="text-[#00C2A8]">en temps réel</span></h1>
+        <p class="text-gray-400 text-lg md:text-xl mb-8">Monitorly détecte proactivement les incidents pour que vous
+            puissiez vous concentrer sur l'essentiel.</p>
+        <button
+            class="bg-[#00C2A8] text-black px-6 py-3 rounded-lg font-bold hover:scale-105 transition-transform duration-300">Démarrer
+            gratuitement</button>
+    </div>
+</section>
+
+<section class="px-6 md:px-20 py-24">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-lg p-6 text-center hover:bg-gray-800/70 transition-all duration-300">
+                <div class="text-3xl md:text-4xl font-bold text-[#00C2A8] mb-2">12,547</div>
+                <div class="text-gray-300 text-sm md:text-base">Machines surveillées</div>
+            </div>
+            <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-lg p-6 text-center hover:bg-gray-800/70 transition-all duration-300">
+                <div class="text-3xl md:text-4xl font-bold text-[#00C2A8] mb-2">847M</div>
+                <div class="text-gray-300 text-sm md:text-base">Métriques collectées</div>
+            </div>
+            <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-lg p-6 text-center hover:bg-gray-800/70 transition-all duration-300">
+                <div class="text-3xl md:text-4xl font-bold text-[#00C2A8] mb-2">2.4M</div>
+                <div class="text-gray-300 text-sm md:text-base">Notifications envoyées</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Fonctionnalités -->
+    <section id="features" class="px-6 md:px-20 py-20 fade-up">
+        <h2 class="text-3xl font-semibold mb-12 text-center">Fonctionnalités clés</h2>
+        <div class="grid md:grid-cols-3 gap-10">
+            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-[#00C2A8] transition">
+                <h3 class="text-xl font-bold mb-2">Déploiement ultra-rapide</h3>
+                <p class="text-gray-400">Une sonde Go simple à configurer, sans prise de tête ni dépendances lourdes.
+                </p>
+            </div>
+            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-[#00C2A8] transition">
+                <h3 class="text-xl font-bold mb-2">Tableau de bord moderne</h3>
+                <p class="text-gray-400">Visualisez l'état de santé de tous vos serveurs avec des graphiques clairs.</p>
+            </div>
+            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-[#00C2A8] transition">
+                <h3 class="text-xl font-bold mb-2">Alertes intelligentes</h3>
+                <p class="text-gray-400">Soyez notifié immédiatement par email ou mobile en cas d'anomalie critique.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Métriques surveillées -->
+    <section id="metrics" class="bg-gray-900 px-6 md:px-20 py-20 fade-up">
+        <h2 class="text-3xl font-semibold mb-8 text-center">Ce que vous pouvez surveiller</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div>📊 CPU & RAM</div>
+            <div>💽 Disque</div>
+            <div>🌐 Réseau</div>
+            <div>🧰 Services (Web, DB...)</div>
+            <div>📅 Cron jobs</div>
+            <div>⚙️ Commandes custom</div>
+            <div>🔒 SSL / Ping</div>
+            <div>🧪 Statut API</div>
+        </div>
+    </section>
+
+    <!-- Tarifs -->
+    <section id="pricing" class="px-6 md:px-20 py-20 fade-up">
+        <h2 class="text-3xl font-semibold mb-12 text-center">Tarifs simples</h2>
+        <div class="grid md:grid-cols-3 gap-10">
+            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                <h3 class="text-xl font-bold mb-2">Gratuit</h3>
+                <p class="text-gray-400">Pour les petits projets. 2 serveurs, alertes email uniquement.</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-xl border-2 border-[#00C2A8]">
+                <h3 class="text-xl font-bold mb-2">Pro – 15€/mois</h3>
+                <p class="text-white">Serveurs illimités, alertes push, dashboards personnalisés.</p>
+            </div>
+            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                <h3 class="text-xl font-bold mb-2">Entreprise</h3>
+                <p class="text-gray-400">Sur-mesure, support dédié, hébergement privé.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avis clients -->
+    <section class="bg-gray-900 px-6 md:px-20 py-20 fade-up">
+        <h2 class="text-3xl font-semibold mb-8 text-center">Ils utilisent Monitorly</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-gray-800 p-6 rounded-xl">
+                <p class="italic text-gray-300">"On reçoit les alertes en temps réel sans faux positifs. L'équipe adore
+                    !"</p>
+                <p class="mt-4 font-bold">– Camille, DevOps</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-xl">
+                <p class="italic text-gray-300">"Enfin une solution de monitoring compréhensible et efficace."</p>
+                <p class="mt-4 font-bold">– Julien, CTO</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-xl">
+                <p class="italic text-gray-300">"Simple à installer, et le dashboard est magnifique."</p>
+                <p class="mt-4 font-bold">– Sarah, Admin Système</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="px-6 md:px-20 py-20 fade-up">
+        <h2 class="text-3xl font-semibold mb-8 text-center">FAQ</h2>
+        <div class="space-y-6 max-w-3xl mx-auto">
+            <div>
+                <h3 class="font-semibold">Est-ce open source ?</h3>
+                <p class="text-gray-400">Oui, le code de la sonde est disponible publiquement pour validation.</p>
+            </div>
+            <div>
+                <h3 class="font-semibold">Où sont hébergées les données ?</h3>
+                <p class="text-gray-400">En Europe, dans le respect du RGPD.</p>
+            </div>
+            <div>
+                <h3 class="font-semibold">Comment fonctionne la configuration ?</h3>
+                <p class="text-gray-400">Elle peut être faite localement ou via notre interface web.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="px-6 md:px-20 py-10 border-t border-gray-800 text-sm text-gray-500 text-center">
+        <div>&copy; 2025 Monitorly</div>
+        <div class="mt-2">
+            <a href="#" class="hover:text-white">Mentions légales</a> ·
+            <a href="#" class="hover:text-white">Politique de confidentialité</a>
+        </div>
+    </footer>
+</body>
+
+</html>
