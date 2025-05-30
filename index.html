@@ -200,7 +200,7 @@
 <!-- Hero -->
 <section
     class="px-6 md:px-20 py-24 text-center fade-up relative overflow-hidden min-h-[80vh] flex items-center justify-center">
-    <!-- Sphère réseau en arrière-plan -->
+    <!-- Sphère -->
     <div class="network-sphere">
         <div class="sphere-outline"></div>
         <div class="meridian"></div>
@@ -301,43 +301,139 @@
     </div>
 </section>
 
+<!-- Bento Grid Section -->
+<section class="px-6 md:px-20 py-20 fade-up">
+    <div class="mx-auto max-w-2xl lg:max-w-7xl">
+      <h2 class="text-base/7 font-semibold text-[#00C2A8]">Déployez plus vite</h2>
+      <p class="mt-2 max-w-lg text-4xl font-semibold tracking-tight text-white sm:text-5xl">Tout ce dont vous avez besoin pour surveiller vos serveurs</p>
+      <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
 
-    <!-- Fonctionnalités -->
-    <section id="features" class="px-6 md:px-20 py-20 fade-up">
-        <h2 class="text-3xl font-semibold mb-12 text-center">Fonctionnalités clés</h2>
-        <div class="grid md:grid-cols-3 gap-10">
-            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-[#00C2A8] transition">
-                <h3 class="text-xl font-bold mb-2">Déploiement ultra-rapide</h3>
-                <p class="text-gray-400">Une sonde Go simple à configurer, sans prise de tête ni dépendances lourdes.
-                </p>
+        <div class="relative lg:col-span-3">
+          <div class="absolute inset-px rounded-lg bg-gray-900 max-lg:rounded-t-4xl lg:rounded-tl-4xl"></div>
+          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]">
+            <div class="h-80 bg-gradient-to-br from-[#00C2A8]/20 to-gray-800 flex items-center justify-center">
+              <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
             </div>
-            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-[#00C2A8] transition">
-                <h3 class="text-xl font-bold mb-2">Tableau de bord moderne</h3>
-                <p class="text-gray-400">Visualisez l'état de santé de tous vos serveurs avec des graphiques clairs.</p>
+            <div class="p-10 pt-4">
+              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">Customizable probe</h3>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Sonde personnalisable</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">Configurez facilement votre sonde de monitoring selon vos besoins spécifiques et votre infrastructure.</p>
             </div>
-            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-[#00C2A8] transition">
-                <h3 class="text-xl font-bold mb-2">Alertes intelligentes</h3>
-                <p class="text-gray-400">Soyez notifié immédiatement par email ou mobile en cas d'anomalie critique.</p>
-            </div>
+          </div>
+          <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-gray-700 max-lg:rounded-t-4xl lg:rounded-tl-4xl"></div>
         </div>
-    </section>
 
-    <!-- Métriques surveillées -->
-    <section id="metrics" class="bg-gray-900 px-6 md:px-20 py-20 fade-up">
-        <h2 class="text-3xl font-semibold mb-8 text-center">Ce que vous pouvez surveiller</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div>📊 CPU & RAM</div>
-            <div>💽 Disque</div>
-            <div>🌐 Réseau</div>
-            <div>🧰 Services (Web, DB...)</div>
-            <div>📅 Cron jobs</div>
-            <div>⚙️ Commandes custom</div>
-            <div>🔒 SSL / Ping</div>
-            <div>🧪 Statut API</div>
+        <div class="relative lg:col-span-3">
+          <div class="absolute inset-px rounded-lg bg-gray-900 lg:rounded-tr-4xl"></div>
+          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
+            <div class="h-80 bg-gradient-to-br from-blue-500/20 to-gray-800 flex items-center justify-center">
+              <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
+              </svg>
+            </div>
+            <div class="p-10 pt-4">
+              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">Lot of metrics</h3>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Métriques complètes</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">Surveillez CPU, RAM, disque, réseau, services, SSL et bien plus avec des données précises en temps réel.</p>
+            </div>
+          </div>
+          <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-gray-700 lg:rounded-tr-4xl"></div>
         </div>
-    </section>
 
-    <!-- Tarifs -->
+        <div class="relative lg:col-span-2">
+          <div class="absolute inset-px rounded-lg bg-gray-900 lg:rounded-bl-4xl"></div>
+          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-bl-[calc(2rem+1px)]">
+            <div class="h-80 bg-gradient-to-br from-purple-500/20 to-gray-800 flex items-center justify-center">
+              <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.311-.06m0 0v-.025c0-1.564.516-3.014 1.384-4.184L16.5 9.5l.618-.624a14.93 14.93 0 011.184-1.375c.746-.746 1.684-1.33 2.699-1.33.75 0 1.5.19 2.25.57"/>
+              </svg>
+            </div>
+            <div class="p-10 pt-4">
+              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">One click install</h3>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Installation en 1 clic</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">Déployez votre sonde de monitoring instantanément sans configuration complexe.</p>
+            </div>
+          </div>
+          <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-gray-700 lg:rounded-bl-4xl"></div>
+        </div>
+
+        <div class="relative lg:col-span-2">
+          <div class="absolute inset-px rounded-lg bg-gray-900"></div>
+          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
+            <div class="h-80 bg-gradient-to-br from-green-500/20 to-gray-800 flex items-center justify-center">
+              <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/>
+              </svg>
+            </div>
+            <div class="p-10 pt-4">
+              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">Mobile app</h3>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Application mobile</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">Surveillez vos serveurs depuis votre smartphone avec notre app native iOS et Android.</p>
+            </div>
+          </div>
+          <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-gray-700"></div>
+        </div>
+  
+        <div class="relative lg:col-span-2">
+          <div class="absolute inset-px rounded-lg bg-gray-900 max-lg:rounded-b-4xl lg:rounded-br-4xl"></div>
+          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]">
+            <div class="h-80 bg-gradient-to-br from-orange-500/20 to-gray-800 flex items-center justify-center">
+              <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5"/>
+              </svg>
+            </div>
+            <div class="p-10 pt-4">
+              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">Webhook notifications</h3>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Notifications webhook</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">Intégrez vos alertes avec Slack, Discord, Teams ou tout service via webhooks personnalisés.</p>
+            </div>
+          </div>
+          <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-gray-700 max-lg:rounded-b-4xl lg:rounded-br-4xl"></div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features -->
+  <section id="features" class="px-6 md:px-20 py-20 fade-up">
+      <h2 class="text-3xl font-semibold mb-12 text-center">Fonctionnalités clés</h2>
+      <div class="grid md:grid-cols-3 gap-10">
+          <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-[#00C2A8] transition">
+              <h3 class="text-xl font-bold mb-2">Déploiement ultra-rapide</h3>
+              <p class="text-gray-400">Une sonde Go simple à configurer, sans prise de tête ni dépendances lourdes.
+              </p>
+          </div>
+          <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-[#00C2A8] transition">
+              <h3 class="text-xl font-bold mb-2">Tableau de bord moderne</h3>
+              <p class="text-gray-400">Visualisez l'état de santé de tous vos serveurs avec des graphiques clairs.</p>
+          </div>
+          <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-[#00C2A8] transition">
+              <h3 class="text-xl font-bold mb-2">Alertes intelligentes</h3>
+              <p class="text-gray-400">Soyez notifié immédiatement par email ou mobile en cas d'anomalie critique.</p>
+          </div>
+      </div>
+  </section>
+  
+  <!-- Métriques -->
+  <section id="metrics" class="bg-gray-900 px-6 md:px-20 py-20 fade-up">
+      <h2 class="text-3xl font-semibold mb-8 text-center">Ce que vous pouvez surveiller</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div>📊 CPU & RAM</div>
+          <div>💽 Disque</div>
+          <div>🌐 Réseau</div>
+          <div>🧰 Services (Web, DB...)</div>
+          <div>📅 Cron jobs</div>
+          <div>⚙️ Commandes custom</div>
+          <div>🔒 SSL / Ping</div>
+          <div>🧪 Statut API</div>
+      </div>
+  </section>
+
+    <!-- Price -->
     <section id="pricing" class="px-6 md:px-20 py-20 fade-up">
         <h2 class="text-3xl font-semibold mb-12 text-center">Tarifs simples</h2>
         <div class="grid md:grid-cols-3 gap-10">
