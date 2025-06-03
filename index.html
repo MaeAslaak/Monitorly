@@ -303,7 +303,7 @@
 
         <div class="relative lg:col-span-3">
           <div class="absolute inset-px rounded-lg bg-gray-900 lg:rounded-tr-4xl"></div>
-          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
+          <div class="relative flex h-full flex-col overfl8ow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
             <div class="h-80 bg-gradient-to-br from-blue-500/20 to-gray-800 flex items-center justify-center">
               <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
@@ -376,8 +376,6 @@
 <!-- Section features -->
 <section class="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900 relative overflow-hidden flex items-center justify-center px-6 md:px-20 py-12 fade-up">
     <div class="absolute inset-0 bg-gradient-to-b from-gray-950/40 to-transparent to-70%"></div>
-
-
          
     <div class="max-w-7xl mx-auto relative z-10 w-full">
 
@@ -462,24 +460,301 @@
 </section>
 
 
-    <!-- Price PAS FAIT -->
-    <section id="pricing" class="px-6 md:px-20 py-20 fade-up">
-        <h2 class="text-3xl font-semibold mb-12 text-center">Tarifs simples</h2>
-        <div class="grid md:grid-cols-3 gap-10">
-            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
-                <h3 class="text-xl font-bold mb-2">Gratuit</h3>
-                <p class="text-gray-400">Pour les petits projets. 2 serveurs, alertes email uniquement.</p>
+ <!-- Section Pricing -->
+ <section class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-950 relative overflow-hidden flex flex-col items-center justify-center px-6 md:px-20 py-12 fade-up">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent from-70% via-gray-900/10 to-gray-950/40"></div>
+    
+    <div class="text-center mb-12 z-10 relative">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Tarifs simples et transparents</h2>
+        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+            Choisissez le plan qui correspond à vos besoins de monitoring
+        </p>
+    </div>
+
+    <!-- Cards -->
+    <div class="mx-auto mt-8 flex flex-col items-center gap-6 md:flex-row md:justify-center max-w-6xl px-4 sm:px-6 z-10 relative">
+
+        <!-- Free -->
+        <div class="w-full md:w-80 rounded-2xl sm:rounded-3xl bg-gray-800/60 backdrop-blur-sm p-6 md:p-8 ring-1 ring-gray-700/50 scale-90 sm:scale-95 shadow-lg shadow-black/40 transition-all duration-300 hover:scale-95 sm:hover:scale-100 hover:shadow-xl opacity-0 animate-slideInLeft border border-gray-700">
+            <div class="relative">
+                <h3 class="text-lg font-semibold text-white">Gratuit</h3>
+                <span class="absolute top-0 right-0 bg-gray-700 text-gray-300 text-xs font-semibold px-2 py-0.5 rounded-full">Starter</span>
             </div>
-            <div class="bg-gray-800 p-6 rounded-xl border-2 border-[#00C2A8]">
-                <h3 class="text-xl font-bold mb-2">Pro – 15€/mois</h3>
-                <p class="text-white">Serveurs illimités, alertes push, dashboards personnalisés.</p>
+            <p class="mt-4 flex items-baseline gap-x-2">
+                <span class="text-4xl font-semibold tracking-tight text-white">0€</span>
+                <span class="text-base text-gray-400">/mois</span>
+            </p>
+            <p class="mt-6 text-base text-gray-400">Pour les petits projets et découvrir notre solution</p>
+            <ul role="list" class="mt-8 space-y-3 text-sm text-gray-300">
+                <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200">
+                    <svg class="h-5 w-5 text-[#00C2A8]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                    </svg>
+                    2 serveurs maximum
+                </li>
+                <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200">
+                    <svg class="h-5 w-5 text-[#00C2A8]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                    </svg>
+                    Alertes email uniquement
+                </li>
+                <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200">
+                    <svg class="h-5 w-5 text-[#00C2A8]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                    </svg>
+                    Dashboard de base
+                </li>
+                <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200">
+                    <svg class="h-5 w-5 text-[#00C2A8]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                    </svg>
+                    Support communauté
+                </li>
+            </ul>
+            <a href="#" class="mt-8 block rounded-md bg-gray-700 px-3.5 py-2.5 text-center text-sm font-semibold text-white hover:bg-gray-600 transition transform hover:-translate-y-1 hover:shadow-lg">
+                Commencer gratuitement
+            </a>
+        </div>
+
+        <!-- Pro -->
+        <div class="w-full md:w-96 relative z-10 rounded-3xl bg-gradient-to-br from-slate-900 via-gray-900 to-black p-8 shadow-2xl ring-2 ring-[#00C2A8]/30 scale-95 md:scale-100 transition-all duration-500 hover:scale-100 md:hover:scale-105 hover:shadow-[0_25px_50px_-12px_rgba(0,194,168,0.25)] opacity-0 animate-zoomIn animation-delay-200 backdrop-blur-xl border border-[#00C2A8]/20">
+            <div class="absolute -top-5 left-1/2 transform -translate-x-1/2">
+                <div class="bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-500 text-gray-900 px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+                    ⭐ Populaire
+                </div>
             </div>
-            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
-                <h3 class="text-xl font-bold mb-2">Entreprise</h3>
-                <p class="text-gray-400">Sur-mesure, support dédié, hébergement privé.</p>
+
+            <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#00C2A8]/5 via-transparent to-[#00A693]/5"></div>
+            
+            <div class="relative z-10">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-2xl font-bold text-white">Pro</h3>
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#00C2A8] to-[#00A693] flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <div class="flex items-baseline gap-x-2 mb-2">
+                        <span class="text-5xl font-bold bg-gradient-to-r from-[#00C2A8] to-[#00A693] bg-clip-text text-transparent">15€</span>
+                        <span class="text-lg text-gray-300">/mois</span>
+                    </div>
+                    <p class="text-base text-gray-300">Pour les équipes qui ont besoin de monitoring avancé</p>
+                </div>
+                
+                <ul role="list" class="space-y-4 text-sm text-gray-200 mb-8">
+                    <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200 group">
+                        <div class="w-5 h-5 rounded-full bg-gradient-to-br from-[#00C2A8] to-[#00A693] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200">
+                            <svg class="h-3 w-3 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <span class="font-medium">Serveurs illimités</span>
+                    </li>
+                    <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200 group">
+                        <div class="w-5 h-5 rounded-full bg-gradient-to-br from-[#00C2A8] to-[#00A693] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200">
+                            <svg class="h-3 w-3 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <span class="font-medium">Alertes push et SMS</span>
+                    </li>
+                    <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200 group">
+                        <div class="w-5 h-5 rounded-full bg-gradient-to-br from-[#00C2A8] to-[#00A693] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200">
+                            <svg class="h-3 w-3 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <span class="font-medium">Dashboards personnalisés</span>
+                    </li>
+                    <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200 group">
+                        <div class="w-5 h-5 rounded-full bg-gradient-to-br from-[#00C2A8] to-[#00A693] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200">
+                            <svg class="h-3 w-3 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <span class="font-medium">Analytics avancées</span>
+                    </li>
+                    <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200 group">
+                        <div class="w-5 h-5 rounded-full bg-gradient-to-br from-[#00C2A8] to-[#00A693] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200">
+                            <svg class="h-3 w-3 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <span class="font-medium">Support prioritaire</span>
+                    </li>
+                    <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200 group">
+                        <div class="w-5 h-5 rounded-full bg-gradient-to-br from-[#00C2A8] to-[#00A693] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200">
+                            <svg class="h-3 w-3 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <span class="font-medium">API complète</span>
+                    </li>
+                </ul>
+                
+                <button class="w-full rounded-xl bg-gradient-to-r from-[#00C2A8] to-[#00A693] px-6 py-4 text-center text-base font-bold text-white hover:from-[#00A693] hover:to-[#008B7A] transition-all duration-300 transform hover:scale-105 hover:shadow-lg relative overflow-hidden group">
+                    <span class="relative z-10 flex items-center justify-center gap-2">
+                        Commencer maintenant
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </span>
+                    <div class="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12"></div>
+                </button>
             </div>
         </div>
-    </section>
+
+        <!-- Enterprise -->
+        <div class="w-full md:w-80 rounded-2xl sm:rounded-3xl bg-gray-800/60 backdrop-blur-sm p-6 md:p-8 ring-1 ring-gray-700/50 scale-90 sm:scale-95 shadow-lg shadow-black/40 transition-all duration-300 hover:scale-95 sm:hover:scale-100 hover:shadow-xl opacity-0 animate-slideInRight animation-delay-400 border border-gray-700">
+            <div class="relative">
+                <h3 class="text-lg font-semibold text-white">Entreprise</h3>
+                <span class="absolute top-0 right-0 bg-gray-700 text-gray-300 text-xs font-semibold px-2 py-0.5 rounded-full">Sur mesure</span>
+            </div>
+            <p class="mt-4 flex items-baseline gap-x-2">
+                <span class="text-4xl font-semibold tracking-tight text-white">Sur devis</span>
+            </p>
+            <p class="mt-6 text-base text-gray-400">Solutions personnalisées pour les grandes organisations</p>
+            <ul role="list" class="mt-8 space-y-3 text-sm text-gray-300">
+                <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200">
+                    <svg class="h-5 w-5 text-[#00C2A8]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                    </svg>
+                    Tout du plan Pro
+                </li>
+                <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200">
+                    <svg class="h-5 w-5 text-[#00C2A8]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                    </svg>
+                    Support dédié 24/7
+                </li>
+                <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200">
+                    <svg class="h-5 w-5 text-[#00C2A8]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                    </svg>
+                    Hébergement privé
+                </li>
+                <li class="flex gap-x-3 items-center hover:text-white transition-colors duration-200">
+                    <svg class="h-5 w-5 text-[#00C2A8]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075L3.22 11.28a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z" clip-rule="evenodd" />
+                    </svg>
+                    Intégrations personnalisées
+                </li>
+            </ul>
+            <a href="#" class="mt-8 block rounded-md bg-gray-700 px-3.5 py-2.5 text-center text-sm font-semibold text-white hover:bg-gray-600 transition transform hover:-translate-y-1 hover:shadow-lg">
+                Nous contacter
+            </a>
+        </div>
+    </div>
+    
+    <div class="mx-auto mt-12 mb-8 z-10 relative">
+        <p class="mx-auto max-w-2xl text-center text-lg text-gray-300 opacity-0 animate-fadeIn animation-delay-600 px-4">
+            Vous êtes étudiant ? Bénéficiez d'une 
+            <span class="font-bold text-[#00C2A8]">réduction de 50%</span> sur tous nos plans. 
+            <a href="#contact" class="text-[#00C2A8] hover:text-[#00A693] relative inline-block group">
+                Contactez-nous
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#00C2A8] group-hover:w-full transition-all duration-300"></span>
+            </a>
+        </p>
+    </div>
+</section>
+
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes zoomIn {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fadeIn {
+        animation: fadeIn 1s forwards;
+    }
+    
+    .animate-slideInLeft {
+        animation: slideInLeft 1s forwards;
+    }
+    
+    .animate-slideInRight {
+        animation: slideInRight 1s forwards;
+    }
+    
+    .animate-zoomIn {
+        animation: zoomIn 1s forwards;
+    }
+    
+    .fade-up {
+        animation: fadeUp 1s ease-out forwards;
+    }
+    
+    .animation-delay-200 {
+        animation-delay: 0.2s;
+    }
+    
+    .animation-delay-300 {
+        animation-delay: 0.3s;
+    }
+    
+    .animation-delay-400 {
+        animation-delay: 0.4s;
+    }
+    
+    .animation-delay-600 {
+        animation-delay: 0.6s;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.visibility = 'visible';
+                }
+            });
+        }, {threshold: 0.1});
+        
+        document.querySelectorAll('.animate-fadeIn, .animate-slideInLeft, .animate-slideInRight, .animate-zoomIn, .fade-up').forEach(el => {
+            el.style.visibility = 'hidden';
+            observer.observe(el);
+        });
+
+        const cards = document.querySelectorAll('.rounded-2xl, .rounded-3xl');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                cards.forEach(c => {
+                    if (c !== card) c.style.opacity = '0.75';
+                });
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                cards.forEach(c => {
+                    c.style.opacity = '1';
+                });
+            });
+        });
+    });
+</script>
 
     <!-- Avis clients -->
     <section class="bg-gray-900 px-6 md:px-20 py-20 fade-up">
