@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -12,251 +13,330 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      * {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
-      }
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
 
-      html, body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
-      }
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-      h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
-      }
+        .earth-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            perspective: 1000px;
+        }
 
-      .fade-up {
-        animation: fadeUp 1s ease-out forwards;
-        opacity: 0;
-      }
-  
-      @keyframes fadeUp {
-        from {
-          transform: translateY(20px);
-          opacity: 0;
+        .earth-sphere {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: transparent;
+            border: 2px solid rgba(0, 150, 255, 0.3);
+            animation: rotate 20s linear infinite;
+            overflow: hidden;
         }
-        to {
-          transform: translateY(0);
-          opacity: 1;
+
+        .grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-image: 
+                linear-gradient(0deg, transparent 49%, rgba(0, 200, 255, 0.4) 50%, rgba(0, 200, 255, 0.4) 51%, transparent 52%),
+                linear-gradient(90deg, transparent 49%, rgba(0, 200, 255, 0.4) 50%, rgba(0, 200, 255, 0.4) 51%, transparent 52%),
+                linear-gradient(45deg, transparent 49%, rgba(0, 200, 255, 0.2) 50%, rgba(0, 200, 255, 0.2) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 49%, rgba(0, 200, 255, 0.2) 50%, rgba(0, 200, 255, 0.2) 51%, transparent 52%);
+            background-size: 80px 80px, 80px 80px, 120px 120px, 120px 120px;
+            animation: gridPulse 4s ease-in-out infinite alternate;
         }
-      }
-  
-      .network-sphere {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 600px;
-        height: 600px;
-        opacity: 0.15;
-        pointer-events: none;
-        z-index: 0;
-        animation: rotate 120s linear infinite;
-      }
-  
-      @keyframes rotate {
-        from {
-          transform: translate(-50%, -50%) rotate(0deg);
+
+        .network-ring {
+            position: absolute;
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            border-radius: 50%;
+            animation: ringPulse 6s ease-in-out infinite;
         }
-        to {
-          transform: translate(-50%, -50%) rotate(360deg);
+
+        .ring-1 {
+            width: 450px;
+            height: 450px;
+            top: -25px;
+            left: -25px;
+            animation-delay: 0s;
         }
-      }
-  
-      .sphere-outline {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border: 2px solid #00C2A8;
-        border-radius: 50%;
-        opacity: 0.3;
-      }
-  
-      .network-line {
-        position: absolute;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, #00C2A8, transparent);
-        transform-origin: left center;
-        opacity: 0.4;
-        animation: pulse 3s ease-in-out infinite;
-      }
-  
-      .network-node {
-        position: absolute;
-        width: 8px;
-        height: 8px;
-        background: #00C2A8;
-        border-radius: 50%;
-        box-shadow: 0 0 10px #00C2A8;
-        animation: glow 2s ease-in-out infinite alternate;
-      }
-  
-      @keyframes pulse {
-        0%, 100% {
-          opacity: 0.2;
+
+        .ring-2 {
+            width: 500px;
+            height: 500px;
+            top: -50px;
+            left: -50px;
+            animation-delay: 2s;
         }
-        50% {
-          opacity: 0.6;
+
+        .ring-3 {
+            width: 550px;
+            height: 550px;
+            top: -75px;
+            left: -75px;
+            animation-delay: 4s;
         }
-      }
-  
-      @keyframes glow {
-        from {
-          box-shadow: 0 0 5px #00C2A8;
-          transform: scale(1);
+
+        .connection-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(0, 255, 200, 0.6) 50%, 
+                transparent 100%);
+            transform-origin: left center;
+            animation: connectionPulse 3s ease-in-out infinite;
         }
-        to {
-          box-shadow: 0 0 15px #00C2A8, 0 0 25px #00C2A8;
-          transform: scale(1.2);
+
+        .line-1 {
+            top: 30%;
+            left: 20%;
+            width: 180px;
+            transform: rotate(25deg);
+            animation-delay: 0s;
         }
-      }
-  
-      .hero-content {
-        position: relative;
-        z-index: 10;
-      }
-  
-      /* Sphère de réseau 3D */
-      .meridian {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 600px;
-        height: 600px;
-        border: 1px solid #00C2A8;
-        border-radius: 50%;
-        opacity: 0.2;
-      }
-  
-      .meridian:nth-child(1) { transform: translate(-50%, -50%) rotateY(0deg); }
-      .meridian:nth-child(2) { transform: translate(-50%, -50%) rotateY(30deg); }
-      .meridian:nth-child(3) { transform: translate(-50%, -50%) rotateY(60deg); }
-      .meridian:nth-child(4) { transform: translate(-50%, -50%) rotateY(90deg); }
-      .meridian:nth-child(5) { transform: translate(-50%, -50%) rotateY(120deg); }
-      .meridian:nth-child(6) { transform: translate(-50%, -50%) rotateY(150deg); }
-  
-      .latitude {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        border: 1px solid #00C2A8;
-        border-radius: 50%;
-        opacity: 0.15;
-      }
-  
-      .lat-1 {
-        width: 500px;
-        height: 500px;
-        transform: translate(-50%, -50%);
-      }
-      .lat-2 {
-        width: 400px;
-        height: 400px;
-        transform: translate(-50%, -50%);
-      }
-      .lat-3 {
-        width: 300px;
-        height: 300px;
-        transform: translate(-50%, -50%);
-      }
-      .lat-4 {
-        width: 200px;
-        height: 200px;
-        transform: translate(-50%, -50%);
-      }
+
+        .line-2 {
+            top: 70%;
+            left: 25%;
+            width: 160px;
+            transform: rotate(-35deg);
+            animation-delay: 1s;
+        }
+
+        .line-3 {
+            top: 50%;
+            left: 60%;
+            width: 140px;
+            transform: rotate(80deg);
+            animation-delay: 2s;
+        }
+
+        .line-4 {
+            top: 25%;
+            left: 55%;
+            width: 120px;
+            transform: rotate(-60deg);
+            animation-delay: 0.5s;
+        }
+
+        .line-5 {
+            top: 75%;
+            left: 15%;
+            width: 200px;
+            transform: rotate(15deg);
+            animation-delay: 1.5s;
+        }
+
+        .title {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(0, 200, 255, 0.9);
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        .subtitle {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 1s forwards;
+        }
+
+        @keyframes rotate {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        @keyframes gridPulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
+        }
+
+        @keyframes ringPulse {
+            0% { 
+                transform: scale(1); 
+                opacity: 0.3; 
+            }
+            50% { 
+                transform: scale(1.05); 
+                opacity: 0.6; 
+            }
+            100% { 
+                transform: scale(1); 
+                opacity: 0.3; 
+            }
+        }
+
+        @keyframes connectionPulse {
+            0% { opacity: 0.2; transform: scaleX(0); }
+            50% { opacity: 0.8; transform: scaleX(1); }
+            100% { opacity: 0.2; transform: scaleX(0); }
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 20px rgba(0, 200, 255, 0.5); }
+            100% { text-shadow: 0 0 40px rgba(0, 200, 255, 0.9); }
+        }
+
+        @keyframes fadeInUp {
+            0% { 
+                opacity: 0; 
+                transform: translateX(-50%) translateY(20px); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateX(-50%) translateY(0); 
+            }
+        }
+
+        .stats {
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 1.5s forwards;
+        }
+
+        .stat-item {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(0, 100, 200, 0.1);
+            border-left: 3px solid rgba(0, 200, 255, 0.6);
+            backdrop-filter: blur(5px);
+        }
+
+        @media (max-width: 768px) {
+            .earth-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                position: static;
+                margin-top: 50px;
+                transform: none;
+            }
+        }
     </style>
-  </head>
+</head>
+
   
 
   <body>
-    <!-- Header -->
-    <header class="bg-gray-950 text-white flex justify-between items-center p-6 border-b border-gray-800 bg-gradient-to-b from-gray-950 to-gray-900">
-        <div class="h-10 w-32 bg-[#00C2A8] rounded flex items-center justify-center text-black font-bold">Monitorly
-        </div>
-        <nav class="hidden md:flex space-x-6 text-gray-300">
-            <a href="#features" class="hover:text-white">Fonctionnalités</a>
-            <a href="#metrics" class="hover:text-white">Métriques</a>
-            <a href="#pricing" class="hover:text-white">Tarifs</a>
-            <a href="#faq" class="hover:text-white">FAQ</a>
-        </nav>
-        <button class="bg-[#00C2A8] text-black px-4 py-2 rounded-md font-semibold hover:opacity-90 transition">Essai
-            gratuit</button>
-    </header>
+   <!-- Header -->
+<header class="bg-gray-950 text-white flex justify-between items-center p-4 sm:p-6 border-b border-gray-800 bg-gradient-to-b from-gray-950 to-gray-900">
+    <div class="h-8 w-24 sm:h-10 sm:w-32 bg-[#00C2A8] rounded flex items-center justify-center text-black font-bold text-sm sm:text-base">
+        Monitorly
+    </div>
+    
+    <nav class="hidden lg:flex space-x-6 text-gray-300">
+        <a href="#metrics" class="hover:text-white transition-colors">Métriques</a>
+        <a href="#features" class="hover:text-white transition-colors">Fonctionnalités</a>
+        <a href="#review" class="hover:text-white transition-colors">Avis</a>
+        <a href="#pricing" class="hover:text-white transition-colors">Tarifs</a>
+        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+    </nav>
+    
+    <div class="flex items-center space-x-3">
+        <button class="bg-[#00C2A8] text-black px-3 py-1.5 sm:px-4 sm:py-2 rounded-md font-semibold hover:opacity-90 transition text-sm sm:text-base">
+            <span class="hidden sm:inline">Essai gratuit</span>
+            <span class="sm:hidden">Essai</span>
+        </button>
+        
+        <button class="lg:hidden flex flex-col space-y-1 p-2" id="mobile-menu-btn">
+            <span class="w-5 h-0.5 bg-white"></span>
+            <span class="w-5 h-0.5 bg-white"></span>
+            <span class="w-5 h-0.5 bg-white"></span>
+        </button>
+    </div>
+</header>
+
+<div class="lg:hidden bg-gray-950 border-b border-gray-800 hidden" id="mobile-menu">
+    <nav class="px-4 py-4 space-y-3">
+        <a href="#metrics" class="block text-gray-300 hover:text-white transition-colors py-2">Métriques</a>
+        <a href="#features" class="block text-gray-300 hover:text-white transition-colors py-2">Fonctionnalités</a>
+        <a href="#review" class="block text-gray-300 hover:text-white transition-colors py-2">Avis</a>
+        <a href="#pricing" class="block text-gray-300 hover:text-white transition-colors py-2">Tarifs</a>
+        <a href="#faq" class="block text-gray-300 hover:text-white transition-colors py-2">FAQ</a>
+    </nav>
+</div>
+
+<script>
+document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+});
+
+document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', function() {
+        document.getElementById('mobile-menu').classList.add('hidden');
+    });
+});
+</script>
 
 <!-- Hero -->
 <section class="min-h-screen bg-gray-950 relative overflow-hidden flex items-center justify-center px-6 md:px-20 py-12">
     <div class="absolute inset-0 bg-gradient-to-br from-gray-800/30 via-transparent to-gray-700/20"></div>
 
-    <!-- Sphère -->
-    <div class="network-sphere">
-        <div class="sphere-outline"></div>
-        <div class="meridian"></div>
-        <div class="meridian"></div>
-        <div class="meridian"></div>
-        <div class="meridian"></div>
-        <div class="meridian"></div>
-        <div class="meridian"></div>
-        <div class="latitude lat-1"></div>
-        <div class="latitude lat-2"></div>
-        <div class="latitude lat-3"></div>
-        <div class="latitude lat-4"></div>
-        <div class="network-line"
-            style="top: 50%; left: 50%; width: 250px; transform: translate(-50%, -50%) rotate(0deg);"></div>
-        <div class="network-line"
-            style="top: 50%; left: 50%; width: 230px; transform: translate(-50%, -50%) rotate(30deg);"></div>
-        <div class="network-line"
-            style="top: 50%; left: 50%; width: 240px; transform: translate(-50%, -50%) rotate(60deg);"></div>
-        <div class="network-line"
-            style="top: 50%; left: 50%; width: 220px; transform: translate(-50%, -50%) rotate(90deg);"></div>
-        <div class="network-line"
-            style="top: 50%; left: 50%; width: 235px; transform: translate(-50%, -50%) rotate(120deg);"></div>
-        <div class="network-line"
-            style="top: 50%; left: 50%; width: 225px; transform: translate(-50%, -50%) rotate(150deg);"></div>
-        <div class="network-line"
-            style="top: 50%; left: 50%; width: 245px; transform: translate(-50%, -50%) rotate(180deg);"></div>
-        <div class="network-line"
-            style="top: 50%; left: 50%; width: 215px; transform: translate(-50%, -50%) rotate(210deg);"></div>
-        <div class="network-line"
-            style="top: 50%; left: 50%; width: 240px; transform: translate(-50%, -50%) rotate(240deg);"></div>
-        <div class="network-line"
-            style="top: 50%; left: 50%; width: 230px; transform: translate(-50%, -50%) rotate(270deg);"></div>
-        <div class="network-line"
-            style="top: 50%; left: 50%; width: 220px; transform: translate(-50%, -50%) rotate(300deg);"></div>
-        <div class="network-line"
-            style="top: 50%; left: 50%; width: 235px; transform: translate(-50%, -50%) rotate(330deg);"></div>
-
-        <div class="network-line" style="top: 20%; left: 10%; width: 180px; transform: rotate(45deg);"></div>
-        <div class="network-line" style="top: 25%; right: 15%; width: 160px; transform: rotate(-30deg);"></div>
-        <div class="network-line" style="top: 30%; left: 20%; width: 200px; transform: rotate(75deg);"></div>
-        <div class="network-line" style="top: 35%; right: 25%; width: 140px; transform: rotate(-60deg);"></div>
-        <div class="network-line" style="bottom: 30%; left: 15%; width: 170px; transform: rotate(15deg);"></div>
-        <div class="network-line" style="bottom: 25%; right: 20%; width: 190px; transform: rotate(-45deg);"></div>
-        <div class="network-line" style="top: 40%; left: 30%; width: 150px; transform: rotate(105deg);"></div>
-        <div class="network-line" style="top: 45%; right: 10%; width: 180px; transform: rotate(-15deg);"></div>
-        <div class="network-line" style="bottom: 40%; left: 25%; width: 160px; transform: rotate(60deg);"></div>
-        <div class="network-line" style="bottom: 35%; right: 30%; width: 170px; transform: rotate(-75deg);"></div>
-
-        <div class="network-node" style="top: 15%; left: 20%;"></div>
-        <div class="network-node" style="top: 20%; right: 25%;"></div>
-        <div class="network-node" style="top: 30%; left: 15%;"></div>
-        <div class="network-node" style="top: 35%; right: 20%;"></div>
-        <div class="network-node" style="top: 45%; left: 25%;"></div>
-        <div class="network-node" style="top: 50%; right: 15%;"></div>
-        <div class="network-node" style="top: 55%; left: 30%;"></div>
-        <div class="network-node" style="top: 65%; right: 25%;"></div>
-        <div class="network-node" style="bottom: 35%; left: 20%;"></div>
-        <div class="network-node" style="bottom: 30%; right: 30%;"></div>
-        <div class="network-node" style="bottom: 25%; left: 35%;"></div>
-        <div class="network-node" style="bottom: 20%; right: 15%;"></div>
-        <div class="network-node" style="top: 25%; left: 50%;"></div>
-        <div class="network-node" style="top: 40%; right: 45%;"></div>
-        <div class="network-node" style="bottom: 40%; left: 45%;"></div>
-        <div class="network-node" style="bottom: 45%; right: 50%;"></div>
-        <div class="network-node" style="top: 60%; left: 40%;"></div>
-        <div class="network-node" style="top: 70%; right: 35%;"></div>
-        <div class="network-node" style="top: 50%; left: 50%;"></div>
+    <div class="earth-container">
+        <!-- Anneaux de réseau -->
+        <div class="network-ring ring-1"></div>
+        <div class="network-ring ring-2"></div>
+        <div class="network-ring ring-3"></div>
+        
+        <!-- Sphère principale -->
+        <div class="earth-sphere">
+            <div class="grid-lines"></div>
+        </div>
+        
+        <!-- Lignes de connexion -->
+        <div class="connection-line line-1"></div>
+        <div class="connection-line line-2"></div>
+        <div class="connection-line line-3"></div>
+        <div class="connection-line line-4"></div>
+        <div class="connection-line line-5"></div>
     </div>
 
     <!-- section Content -->
@@ -273,100 +353,99 @@
         </button>
 </section>
 
-
   <!-- Bento Grid Section -->
-  <section class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 relative overflow-hidden flex items-center justify-center px-6 md:px-20 py-12 fade-up">
+<section class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 relative overflow-hidden flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-20 py-8 sm:py-12 fade-up">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent from-70% via-gray-900/10 to-gray-950/40"></div>
     
-    <div class="mx-auto max-w-2xl lg:max-w-7xl relative z-10 text-center">
+    <div class="mx-auto max-w-2xl lg:max-w-7xl relative z-10 text-center w-full">
         <h2 class="text-base/7 font-semibold text-[#00C2A8]">Déployez plus vite</h2>
-        <p class="mt-2 mx-auto text-4xl font-semibold tracking-tight text-white sm:text-5xl whitespace-nowrap">Tout ce dont vous avez besoin pour surveiller vos serveurs</p>
-        <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
-
-        <div class="relative lg:col-span-3">
-          <div class="absolute inset-px rounded-lg bg-gray-900 max-lg:rounded-t-4xl lg:rounded-tl-4xl"></div>
-          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]">
-            <div class="h-80 bg-gradient-to-br from-[#00C2A8]/20 to-gray-800 flex items-center justify-center">
-              <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <p class="mt-2 mx-auto text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-white">Tout ce dont vous avez besoin pour surveiller vos serveurs</p>
+        <div class="mt-8 sm:mt-12 lg:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4">
+  
+        <div class="relative sm:col-span-2 lg:col-span-3">
+          <div class="absolute inset-px rounded-lg bg-gray-900 lg:rounded-tl-4xl"></div>
+          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-tl-[calc(2rem+1px)]">
+            <div class="h-48 sm:h-60 lg:h-80 bg-gradient-to-br from-[#00C2A8]/20 to-gray-800 flex items-center justify-center">
+              <svg class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
               </svg>
             </div>
-            <div class="p-10 pt-4">
-              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">Customizable probe</h3>
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Sonde personnalisable</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">Configurez facilement votre sonde de monitoring selon vos besoins spécifiques et votre infrastructure.</p>
+            <div class="p-6 sm:p-8 lg:p-10 pt-4">
+              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">Sonde personnalisable</h3>
+              <p class="mt-2 text-base sm:text-lg font-medium tracking-tight text-white">Sonde personnalisable</p>
+              <p class="mt-2 text-sm/6 text-gray-400">Configurez facilement votre sonde de monitoring selon vos besoins spécifiques et votre infrastructure.</p>
             </div>
           </div>
-          <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-gray-700 max-lg:rounded-t-4xl lg:rounded-tl-4xl"></div>
+          <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-gray-700 lg:rounded-tl-4xl"></div>
         </div>
-
-        <div class="relative lg:col-span-3">
+  
+        <div class="relative sm:col-span-2 lg:col-span-3">
           <div class="absolute inset-px rounded-lg bg-gray-900 lg:rounded-tr-4xl"></div>
-          <div class="relative flex h-full flex-col overfl8ow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
-            <div class="h-80 bg-gradient-to-br from-blue-500/20 to-gray-800 flex items-center justify-center">
-              <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
+            <div class="h-48 sm:h-60 lg:h-80 bg-gradient-to-br from-blue-500/20 to-gray-800 flex items-center justify-center">
+              <svg class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
               </svg>
             </div>
-            <div class="p-10 pt-4">
-              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">Lot of metrics</h3>
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Métriques complètes</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">Surveillez CPU, RAM, disque, réseau, services, SSL et bien plus avec des données précises en temps réel.</p>
+            <div class="p-6 sm:p-8 lg:p-10 pt-4">
+              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">Grand nombre de métriques</h3>
+              <p class="mt-2 text-base sm:text-lg font-medium tracking-tight text-white">Métriques complètes</p>
+              <p class="mt-2 text-sm/6 text-gray-400">Surveillez CPU, RAM, disque, réseau, services, SSL et bien plus avec des données précises en temps réel.</p>
             </div>
           </div>
           <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-gray-700 lg:rounded-tr-4xl"></div>
         </div>
-
-        <div class="relative lg:col-span-2">
+  
+        <div class="relative sm:col-span-1 lg:col-span-2">
           <div class="absolute inset-px rounded-lg bg-gray-900 lg:rounded-bl-4xl"></div>
           <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-bl-[calc(2rem+1px)]">
-            <div class="h-80 bg-gradient-to-br from-purple-500/20 to-gray-800 flex items-center justify-center">
-              <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="h-48 sm:h-60 lg:h-80 bg-gradient-to-br from-purple-500/20 to-gray-800 flex items-center justify-center">
+              <svg class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.311-.06m0 0v-.025c0-1.564.516-3.014 1.384-4.184L16.5 9.5l.618-.624a14.93 14.93 0 011.184-1.375c.746-.746 1.684-1.33 2.699-1.33.75 0 1.5.19 2.25.57"/>
               </svg>
             </div>
-            <div class="p-10 pt-4">
-              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">One click install</h3>
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Installation en 1 clic</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">Déployez votre sonde de monitoring instantanément sans configuration complexe.</p>
+            <div class="p-6 sm:p-8 lg:p-10 pt-4">
+              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">Installation en un clic</h3>
+              <p class="mt-2 text-base sm:text-lg font-medium tracking-tight text-white">Installation en 1 clic</p>
+              <p class="mt-2 text-sm/6 text-gray-400">Déployez votre sonde de monitoring instantanément sans configuration complexe.</p>
             </div>
           </div>
           <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-gray-700 lg:rounded-bl-4xl"></div>
         </div>
-
-        <div class="relative lg:col-span-2">
+  
+        <div class="relative sm:col-span-1 lg:col-span-2">
           <div class="absolute inset-px rounded-lg bg-gray-900"></div>
           <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
-            <div class="h-80 bg-gradient-to-br from-green-500/20 to-gray-800 flex items-center justify-center">
-              <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="h-48 sm:h-60 lg:h-80 bg-gradient-to-br from-green-500/20 to-gray-800 flex items-center justify-center">
+              <svg class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/>
               </svg>
             </div>
-            <div class="p-10 pt-4">
-              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">Mobile app</h3>
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Application mobile</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">Surveillez vos serveurs depuis votre smartphone avec notre app native iOS et Android.</p>
+            <div class="p-6 sm:p-8 lg:p-10 pt-4">
+              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">Application mobile</h3>
+              <p class="mt-2 text-base sm:text-lg font-medium tracking-tight text-white">Application mobile</p>
+              <p class="mt-2 text-sm/6 text-gray-400">Surveillez vos serveurs depuis votre smartphone avec notre app native iOS et Android.</p>
             </div>
           </div>
           <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-gray-700"></div>
         </div>
   
-        <div class="relative lg:col-span-2">
-          <div class="absolute inset-px rounded-lg bg-gray-900 max-lg:rounded-b-4xl lg:rounded-br-4xl"></div>
-          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]">
-            <div class="h-80 bg-gradient-to-br from-orange-500/20 to-gray-800 flex items-center justify-center">
-              <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="relative sm:col-span-2 lg:col-span-2">
+          <div class="absolute inset-px rounded-lg bg-gray-900 sm:rounded-b-4xl lg:rounded-br-4xl lg:rounded-b-none"></div>
+          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] sm:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)] lg:rounded-b-[calc(var(--radius-lg)+1px)]">
+            <div class="h-48 sm:h-60 lg:h-80 bg-gradient-to-br from-orange-500/20 to-gray-800 flex items-center justify-center">
+              <svg class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5"/>
               </svg>
             </div>
-            <div class="p-10 pt-4">
-              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">Webhook notifications</h3>
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Notifications webhook</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">Intégrez vos alertes avec Slack, Discord, Teams ou tout service via webhooks personnalisés.</p>
+            <div class="p-6 sm:p-8 lg:p-10 pt-4">
+              <h3 class="text-sm/4 font-semibold text-[#00C2A8]">Alerte webhook</h3>
+              <p class="mt-2 text-base sm:text-lg font-medium tracking-tight text-white">Notifications webhook</p>
+              <p class="mt-2 text-sm/6 text-gray-400">Intégrez vos alertes avec Slack, Discord, Teams ou tout service via webhooks personnalisés.</p>
             </div>
           </div>
-          <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-gray-700 max-lg:rounded-b-4xl lg:rounded-br-4xl"></div>
+          <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-gray-700 sm:rounded-b-4xl lg:rounded-br-4xl lg:rounded-b-none"></div>
         </div>
   
       </div>
@@ -381,9 +460,9 @@
 
         <div class="text-center mb-16 fade-up">
             <h2 class="text-base/7 font-semibold text-[#00C2A8] mb-4">Performance</h2>
-            <p class="text-4xl font-semibold tracking-tight text-white sm:text-5xl max-w-4xl mx-auto mb-6 whitespace-nowrap">
+            <p class="text-4xl sm:text-5xl font-semibold tracking-tight text-white max-w-4xl mx-auto mb-6 whitespace-nowrap">
                 Des performances qui parlent d'elles-mêmes
-            </p>
+              </p>              
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 fade-up">
@@ -408,9 +487,9 @@
 
         <div class="text-center mb-12 fade-up">
             <h2 class="text-base/7 font-semibold text-[#00C2A8] mb-4">Fonctionnalités</h2>
-            <p class="text-3xl md:text-4xl font-bold text-white">
+            <p class="text-4xl sm:text-5xl font-semibold tracking-tight text-white mb-6">
                 Fonctionnalités clés
-            </p>
+              </p>              
         </div>
 
         <div class="grid md:grid-cols-3 gap-8 fade-up">
@@ -537,9 +616,9 @@
     
     <div class="relative z-10 max-w-7xl mx-auto text-center">
         <div class="mb-16">
-            <h2 class="text-5xl md:text-6xl font-bold mb-6 text-white">
+            <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight text-white mb-6">
                 Ils font confiance à Monitorly
-            </h2>
+              </h2>              
             <p class="text-xl text-gray-300 max-w-2xl mx-auto">
                 Découvrez pourquoi des milliers de développeurs choisissent notre solution de monitoring
             </p>
@@ -646,9 +725,9 @@
     <div class="absolute inset-0 bg-gradient-to-b from-gray-950/40 to-transparent to-70%"></div>
 
     <div class="max-w-6xl mx-auto text-center mb-16 relative z-10">
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+        <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight text-white mb-6">
             Tarifs simples et transparents
-        </h2>
+          </h2>          
         <p class="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
             Choisissez le plan qui correspond à vos besoins de monitoring
         </p>
@@ -958,32 +1037,424 @@
  
 
     <!-- FAQ -->
-    <section id="faq" class="px-6 md:px-20 py-20 fade-up">
-        <h2 class="text-3xl font-semibold mb-8 text-center">FAQ</h2>
-        <div class="space-y-6 max-w-3xl mx-auto">
-            <div>
-                <h3 class="font-semibold">Est-ce open source ?</h3>
-                <p class="text-gray-400">Oui, le code de la sonde est disponible publiquement pour validation.</p>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(180deg); }
+        }
+        
+        .faq-item {
+            animation: fadeInUp 0.6s ease-out forwards;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .faq-item:nth-child(1) { animation-delay: 0.1s; }
+        .faq-item:nth-child(2) { animation-delay: 0.2s; }
+        .faq-item:nth-child(3) { animation-delay: 0.3s; }
+        .faq-item:nth-child(4) { animation-delay: 0.4s; }
+        .faq-item:nth-child(5) { animation-delay: 0.5s; }
+        .faq-item:nth-child(6) { animation-delay: 0.6s; }
+        
+        .faq-question {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+        
+        .faq-answer.open {
+            max-height: 200px;
+            padding: 1.5rem;
+        }
+        
+        .chevron {
+            transition: transform 0.3s ease;
+        }
+        
+        .chevron.rotated {
+            transform: rotate(180deg);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+    
+    <section class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 relative overflow-hidden flex items-center justify-center px-6 md:px-20 py-12 fade-up">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent from-70% via-gray-900/10 to-gray-950/40"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight text-white mb-6">
+                    Questions Fréquentes
+                  </h2>                  
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                    Tout ce que vous devez savoir sur Monitorly
+                </p>
             </div>
-            <div>
-                <h3 class="font-semibold">Où sont hébergées les données ?</h3>
-                <p class="text-gray-400">En Europe, dans le respect du RGPD.</p>
+            
+            <div class="space-y-4">
+                <!-- Question 1 -->
+                <div class="faq-item bg-gradient-to-r from-gray-800/50 to-gray-900/50 rounded-xl overflow-hidden">
+                    <div class="faq-question flex items-center justify-between p-6" onclick="toggleFAQ(this)">
+                        <h3 class="text-xl font-semibold text-white flex items-center">
+                            <span class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold mr-4">?</span>
+                            Est-ce que Monitorly est open source ?
+                        </h3>
+                        <svg class="chevron w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer bg-gray-800/30">
+                        <p class="text-gray-300 leading-relaxed">
+                            Oui, le code de la sonde est entièrement open source et disponible publiquement sur GitHub. Cela vous permet de valider la sécurité, de contribuer au projet et d'adapter la solution à vos besoins spécifiques.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Question 2 -->
+                <div class="faq-item bg-gradient-to-r from-gray-800/50 to-gray-900/50 rounded-xl overflow-hidden">
+                    <div class="faq-question flex items-center justify-between p-6" onclick="toggleFAQ(this)">
+                        <h3 class="text-xl font-semibold text-white flex items-center">
+                            <span class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm font-bold mr-4">🔒</span>
+                            Où sont hébergées mes données ?
+                        </h3>
+                        <svg class="chevron w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer bg-gray-800/30">
+                        <p class="text-gray-300 leading-relaxed">
+                            Toutes vos données sont hébergées en Europe dans des centres de données certifiés, en parfaite conformité avec le RGPD. Nous garantissons la souveraineté de vos données et leur protection maximale.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Question 3 -->
+                <div class="faq-item bg-gradient-to-r from-gray-800/50 to-gray-900/50 rounded-xl overflow-hidden">
+                    <div class="faq-question flex items-center justify-between p-6" onclick="toggleFAQ(this)">
+                        <h3 class="text-xl font-semibold text-white flex items-center">
+                            <span class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-sm font-bold mr-4">⚙️</span>
+                            Comment configurer Monitorly ?
+                        </h3>
+                        <svg class="chevron w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer bg-gray-800/30">
+                        <p class="text-gray-300 leading-relaxed">
+                            Vous avez le choix : configuration locale via fichiers YAML/JSON ou interface web intuitive. L'installation se fait en une ligne de commande et la configuration prend moins de 5 minutes.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Question 4 -->
+                <div class="faq-item bg-gradient-to-r from-gray-800/50 to-gray-900/50 rounded-xl overflow-hidden">
+                    <div class="faq-question flex items-center justify-between p-6" onclick="toggleFAQ(this)">
+                        <h3 class="text-xl font-semibold text-white flex items-center">
+                            <span class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-sm font-bold mr-4">💰</span>
+                            Quels sont les tarifs ?
+                        </h3>
+                        <svg class="chevron w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer bg-gray-800/30">
+                        <p class="text-gray-300 leading-relaxed">
+                            Nous proposons une version gratuite pour débuter, puis des plans adaptés à vos besoins : Starter (9€/mois), Pro (29€/mois) et Enterprise (sur devis). 14 jours d'essai gratuit sur tous les plans.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Question 5 -->
+                <div class="faq-item bg-gradient-to-r from-gray-800/50 to-gray-900/50 rounded-xl overflow-hidden">
+                    <div class="faq-question flex items-center justify-between p-6" onclick="toggleFAQ(this)">
+                        <h3 class="text-xl font-semibold text-white flex items-center">
+                            <span class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-sm font-bold mr-4">🚀</span>
+                            Combien de temps pour installer ?
+                        </h3>
+                        <svg class="chevron w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer bg-gray-800/30">
+                        <p class="text-gray-300 leading-relaxed">
+                            L'installation complète prend moins de 10 minutes ! Un simple `curl` pour télécharger, quelques paramètres à renseigner et c'est parti. Nos guides pas-à-pas vous accompagnent.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Question 6 -->
+                <div class="faq-item bg-gradient-to-r from-gray-800/50 to-gray-900/50 rounded-xl overflow-hidden">
+                    <div class="faq-question flex items-center justify-between p-6" onclick="toggleFAQ(this)">
+                        <h3 class="text-xl font-semibold text-white flex items-center">
+                            <span class="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center text-sm font-bold mr-4">📞</span>
+                            Quel support est disponible ?
+                        </h3>
+                        <svg class="chevron w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer bg-gray-800/30">
+                        <p class="text-gray-300 leading-relaxed">
+                            Support 24/7 par email, chat en direct pendant les heures ouvrées, documentation complète, tutoriels vidéo et communauté active. Support téléphonique disponible pour les plans Enterprise.
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div>
-                <h3 class="font-semibold">Comment fonctionne la configuration ?</h3>
-                <p class="text-gray-400">Elle peut être faite localement ou via notre interface web.</p>
+            
+            <div class="text-center mt-12">
+                <p class="text-gray-400 mb-6">Une autre question ?</p>
+                <a href="#contact" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200">
+                    Nous contacter
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
+    
+    <script>
+    function toggleFAQ(element) {
+        const answer = element.nextElementSibling;
+        const chevron = element.querySelector('.chevron');
+        const allAnswers = document.querySelectorAll('.faq-answer');
+        const allChevrons = document.querySelectorAll('.chevron');
+
+        allAnswers.forEach((item, index) => {
+            if (item !== answer) {
+                item.classList.remove('open');
+                allChevrons[index].classList.remove('rotated');
+            }
+        });
+    
+        answer.classList.toggle('open');
+        chevron.classList.toggle('rotated');
+    }
+    </script>
 
     <!-- Footer -->
-    <footer class="px-6 md:px-20 py-10 border-t border-gray-800 text-sm text-gray-500 text-center">
-        <div>&copy; 2025 Monitorly</div>
-        <div class="mt-2">
-            <a href="#" class="hover:text-white">Mentions légales</a> ·
-            <a href="#" class="hover:text-white">Politique de confidentialité</a>
+
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .footer-section {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .footer-section:nth-child(1) { animation-delay: 0.1s; }
+        .footer-section:nth-child(2) { animation-delay: 0.2s; }
+        .footer-section:nth-child(3) { animation-delay: 0.3s; }
+        .footer-section:nth-child(4) { animation-delay: 0.4s; }
+        
+        .footer-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: #60a5fa;
+            transform: translateX(5px);
+        }
+        
+        .footer-link::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #60a5fa, #a855f7);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover::before {
+            width: 100%;
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: #60a5fa;
+        }
+        
+        .logo-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .floating-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(96, 165, 250, 0.3);
+            border-radius: 50%;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .dot:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .dot:nth-child(2) { top: 60%; left: 20%; animation-delay: 1s; }
+        .dot:nth-child(3) { top: 30%; right: 15%; animation-delay: 2s; }
+        .dot:nth-child(4) { top: 80%; right: 30%; animation-delay: 3s; }
+    </style>
+    
+    <footer class="bg-gradient-to-b from-gray-950 to-gray-900 relative overflow-hidden px-6 md:px-20 py-16">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-950/40 to-transparent to-70%"></div>
+        
+        <div class="floating-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+  
+                <div class="footer-section lg:col-span-1">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold logo-text mb-4">Monitorly</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            La solution de monitoring moderne qui simplifie la surveillance de votre infrastructure.
+                        </p>
+                    </div>
+
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center text-gray-400">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center text-gray-400">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center text-gray-400">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Navigation -->
+                <div class="footer-section">
+                    <h4 class="text-lg font-semibold text-white mb-6">Navigation</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#metriques" class="footer-link text-gray-400 hover:text-white">Métriques</a></li>
+                        <li><a href="#fonctionnalites" class="footer-link text-gray-400 hover:text-white">Fonctionnalités</a></li>
+                        <li><a href="#avis" class="footer-link text-gray-400 hover:text-white">Avis clients</a></li>
+                        <li><a href="#tarifs" class="footer-link text-gray-400 hover:text-white">Tarifs</a></li>
+                        <li><a href="#faq" class="footer-link text-gray-400 hover:text-white">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Produit -->
+                <div class="footer-section">
+                    <h4 class="text-lg font-semibold text-white mb-6">Produit</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link text-gray-400 hover:text-white">Documentation</a></li>
+                        <li><a href="#" class="footer-link text-gray-400 hover:text-white">API</a></li>
+                        <li><a href="#" class="footer-link text-gray-400 hover:text-white">Intégrations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="text-lg font-semibold text-white mb-6">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link text-gray-400 hover:text-white">Centre d'aide</a></li>
+                        <li><a href="#" class="footer-link text-gray-400 hover:text-white">Contact</a></li>
+                        <li><a href="#" class="footer-link text-gray-400 hover:text-white">Communauté</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 mb-8">
+                <div class="max-w-md mx-auto text-center">
+                    <h4 class="text-lg font-semibold text-white mb-4">Restez informé</h4>
+                    <p class="text-gray-400 mb-6">Recevez nos dernières actualités et conseils monitoring</p>
+                    <div class="flex gap-3">
+                        <input 
+                            type="email" 
+                            placeholder="votre@email.com" 
+                            class="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
+                        >
+                        <button class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200">
+                            S'abonner
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-gray-400 mb-4 md:mb-0">
+                        &copy; 2025 Monitorly. Tous droits réservés.
+                    </div>
+                    <div class="flex space-x-6 text-sm">
+                        <a href="#" class="footer-link text-gray-400 hover:text-white">Mentions légales</a>
+                        <a href="#" class="footer-link text-gray-400 hover:text-white">Politique de confidentialité</a>
+                        <a href="#" class="footer-link text-gray-400 hover:text-white">CGU</a>
+                        <a href="#" class="footer-link text-gray-400 hover:text-white">Cookies</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
+
 </body>
 
 </html>
