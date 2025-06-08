@@ -1,365 +1,250 @@
-
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Monitorly - Surveillez vos serveurs intelligemment</title>
-  
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Monitoring</title>
     <script src="https://cdn.tailwindcss.com"></script>
-  
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            font-family: 'Arial', sans-serif;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        .container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .earth-container {
-            position: relative;
-            width: 400px;
-            height: 400px;
-            perspective: 1000px;
-        }
-
-        .earth-sphere {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: transparent;
-            border: 2px solid rgba(0, 150, 255, 0.3);
-            animation: rotate 20s linear infinite;
-            overflow: hidden;
-        }
-
-        .grid-lines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background-image: 
-                linear-gradient(0deg, transparent 49%, rgba(0, 200, 255, 0.4) 50%, rgba(0, 200, 255, 0.4) 51%, transparent 52%),
-                linear-gradient(90deg, transparent 49%, rgba(0, 200, 255, 0.4) 50%, rgba(0, 200, 255, 0.4) 51%, transparent 52%),
-                linear-gradient(45deg, transparent 49%, rgba(0, 200, 255, 0.2) 50%, rgba(0, 200, 255, 0.2) 51%, transparent 52%),
-                linear-gradient(-45deg, transparent 49%, rgba(0, 200, 255, 0.2) 50%, rgba(0, 200, 255, 0.2) 51%, transparent 52%);
-            background-size: 80px 80px, 80px 80px, 120px 120px, 120px 120px;
-            animation: gridPulse 4s ease-in-out infinite alternate;
-        }
-
-        .network-ring {
-            position: absolute;
-            border: 1px solid rgba(0, 200, 255, 0.3);
-            border-radius: 50%;
-            animation: ringPulse 6s ease-in-out infinite;
-        }
-
-        .ring-1 {
-            width: 450px;
-            height: 450px;
-            top: -25px;
-            left: -25px;
-            animation-delay: 0s;
-        }
-
-        .ring-2 {
-            width: 500px;
-            height: 500px;
-            top: -50px;
-            left: -50px;
-            animation-delay: 2s;
-        }
-
-        .ring-3 {
-            width: 550px;
-            height: 550px;
-            top: -75px;
-            left: -75px;
-            animation-delay: 4s;
-        }
-
-        .connection-line {
-            position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(0, 255, 200, 0.6) 50%, 
-                transparent 100%);
-            transform-origin: left center;
-            animation: connectionPulse 3s ease-in-out infinite;
-        }
-
-        .line-1 {
-            top: 30%;
-            left: 20%;
-            width: 180px;
-            transform: rotate(25deg);
-            animation-delay: 0s;
-        }
-
-        .line-2 {
-            top: 70%;
-            left: 25%;
-            width: 160px;
-            transform: rotate(-35deg);
-            animation-delay: 1s;
-        }
-
-        .line-3 {
-            top: 50%;
-            left: 60%;
-            width: 140px;
-            transform: rotate(80deg);
-            animation-delay: 2s;
-        }
-
-        .line-4 {
-            top: 25%;
-            left: 55%;
-            width: 120px;
-            transform: rotate(-60deg);
-            animation-delay: 0.5s;
-        }
-
-        .line-5 {
-            top: 75%;
-            left: 15%;
-            width: 200px;
-            transform: rotate(15deg);
-            animation-delay: 1.5s;
-        }
-
-        .title {
-            position: absolute;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(0, 200, 255, 0.9);
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-align: center;
-            text-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
-            animation: titleGlow 3s ease-in-out infinite alternate;
-        }
-
-        .subtitle {
-            position: absolute;
-            bottom: 15%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.2rem;
-            text-align: center;
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
             opacity: 0;
-            animation: fadeInUp 2s ease-out 1s forwards;
+            transform: translateY(30px);
         }
 
-        @keyframes rotate {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
-        }
-
-        @keyframes gridPulse {
-            0% { opacity: 0.3; }
-            100% { opacity: 0.8; }
-        }
-
-        @keyframes ringPulse {
-            0% { 
-                transform: scale(1); 
-                opacity: 0.3; 
-            }
-            50% { 
-                transform: scale(1.05); 
-                opacity: 0.6; 
-            }
-            100% { 
-                transform: scale(1); 
-                opacity: 0.3; 
-            }
-        }
-
-        @keyframes connectionPulse {
-            0% { opacity: 0.2; transform: scaleX(0); }
-            50% { opacity: 0.8; transform: scaleX(1); }
-            100% { opacity: 0.2; transform: scaleX(0); }
-        }
-
-        @keyframes titleGlow {
-            0% { text-shadow: 0 0 20px rgba(0, 200, 255, 0.5); }
-            100% { text-shadow: 0 0 40px rgba(0, 200, 255, 0.9); }
+        .fade-up {
+            animation: fadeUp 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
         }
 
         @keyframes fadeInUp {
-            0% { 
-                opacity: 0; 
-                transform: translateX(-50%) translateY(20px); 
-            }
-            100% { 
-                opacity: 1; 
-                transform: translateX(-50%) translateY(0); 
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        .stats {
-            position: absolute;
-            top: 50%;
-            right: 5%;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-            opacity: 0;
-            animation: fadeInUp 2s ease-out 1.5s forwards;
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .stat-item {
-            margin: 15px 0;
-            padding: 10px;
-            background: rgba(0, 100, 200, 0.1);
-            border-left: 3px solid rgba(0, 200, 255, 0.6);
-            backdrop-filter: blur(5px);
+        .dashboard-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
         }
 
-        @media (max-width: 768px) {
-            .earth-container {
-                width: 300px;
-                height: 300px;
-            }
-            
-            .title {
-                font-size: 2rem;
-            }
-            
-            .stats {
-                position: static;
-                margin-top: 50px;
-                transform: none;
-            }
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
         }
+
+        .status-green {
+            background-color: #10b981;
+            box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
+        }
+
+        .status-yellow {
+            background-color: #f59e0b;
+            box-shadow: 0 0 6px rgba(245, 158, 11, 0.4);
+        }
+
+        .status-red {
+            background-color: #ef4444;
+            box-shadow: 0 0 6px rgba(239, 68, 68, 0.4);
+        }
+
+
     </style>
 </head>
-
-  
-
-  <body>
-   <!-- Header -->
-<header class="bg-gray-950 text-white flex justify-between items-center p-4 sm:p-6 border-b border-gray-800 bg-gradient-to-b from-gray-950 to-gray-900">
-    <div class="h-8 w-24 sm:h-10 sm:w-32 bg-[#00C2A8] rounded flex items-center justify-center text-black font-bold text-sm sm:text-base">
-        Monitorly
-    </div>
-    
-    <nav class="hidden lg:flex space-x-6 text-gray-300">
-        <a href="#metrics" class="hover:text-white transition-colors">Métriques</a>
-        <a href="#features" class="hover:text-white transition-colors">Fonctionnalités</a>
-        <a href="#review" class="hover:text-white transition-colors">Avis</a>
-        <a href="#pricing" class="hover:text-white transition-colors">Tarifs</a>
-        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
-    </nav>
-    
-    <div class="flex items-center space-x-3">
-        <button class="bg-[#00C2A8] text-black px-3 py-1.5 sm:px-4 sm:py-2 rounded-md font-semibold hover:opacity-90 transition text-sm sm:text-base">
-            <span class="hidden sm:inline">Essai gratuit</span>
-            <span class="sm:hidden">Essai</span>
-        </button>
-        
-        <button class="lg:hidden flex flex-col space-y-1 p-2" id="mobile-menu-btn">
-            <span class="w-5 h-0.5 bg-white"></span>
-            <span class="w-5 h-0.5 bg-white"></span>
-            <span class="w-5 h-0.5 bg-white"></span>
-        </button>
-    </div>
-</header>
-
-<div class="lg:hidden bg-gray-950 border-b border-gray-800 hidden" id="mobile-menu">
-    <nav class="px-4 py-4 space-y-3">
-        <a href="#metrics" class="block text-gray-300 hover:text-white transition-colors py-2">Métriques</a>
-        <a href="#features" class="block text-gray-300 hover:text-white transition-colors py-2">Fonctionnalités</a>
-        <a href="#review" class="block text-gray-300 hover:text-white transition-colors py-2">Avis</a>
-        <a href="#pricing" class="block text-gray-300 hover:text-white transition-colors py-2">Tarifs</a>
-        <a href="#faq" class="block text-gray-300 hover:text-white transition-colors py-2">FAQ</a>
-    </nav>
-</div>
-
-<script>
-document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-    const mobileMenu = document.getElementById('mobile-menu');
-    mobileMenu.classList.toggle('hidden');
-});
-
-document.querySelectorAll('#mobile-menu a').forEach(link => {
-    link.addEventListener('click', function() {
-        document.getElementById('mobile-menu').classList.add('hidden');
-    });
-});
-</script>
-
-<!-- Hero -->
-<section class="min-h-screen bg-gray-950 relative overflow-hidden flex items-center justify-center px-6 md:px-20 py-12">
-    <div class="absolute inset-0 bg-gradient-to-br from-gray-800/30 via-transparent to-gray-700/20"></div>
-
-    <div class="earth-container">
-        <!-- Anneaux de réseau -->
-        <div class="network-ring ring-1"></div>
-        <div class="network-ring ring-2"></div>
-        <div class="network-ring ring-3"></div>
-        
-        <!-- Sphère principale -->
-        <div class="earth-sphere">
-            <div class="grid-lines"></div>
+<body class="bg-gray-950">
+    <!-- Navigation -->
+    <nav class="bg-gray-950/95 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 md:px-20">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold text-white">ServerWatch</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-300 hover:text-[#00C2A8] transition-colors">Features</a>
+                    <a href="#" class="text-gray-300 hover:text-[#00C2A8] transition-colors">Pricing</a>
+                    <a href="#" class="text-gray-300 hover:text-[#00C2A8] transition-colors">Docs</a>
+                    <a href="#" class="text-gray-300 hover:text-[#00C2A8] transition-colors">Support</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
         
-        <!-- Lignes de connexion -->
-        <div class="connection-line line-1"></div>
-        <div class="connection-line line-2"></div>
-        <div class="connection-line line-3"></div>
-        <div class="connection-line line-4"></div>
-        <div class="connection-line line-5"></div>
-    </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-800">
+            <div class="px-6 py-4 space-y-2">
+                <a href="#" class="block text-gray-300 hover:text-[#00C2A8] py-2">Features</a>
+                <a href="#" class="block text-gray-300 hover:text-[#00C2A8] py-2">Pricing</a>
+                <a href="#" class="block text-gray-300 hover:text-[#00C2A8] py-2">Docs</a>
+                <a href="#" class="block text-gray-300 hover:text-[#00C2A8] py-2">Support</a>
+            </div>
+        </div>
+    </nav>
 
-    <!-- section Content -->
-    <div class="hero-content text-center">
-        <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6 text-white">
-            Surveillez votre infrastructure <span class="text-[#00C2A8]">en temps réel</span>
-        </h1>
-        <p class="text-gray-400 text-lg md:text-xl mb-8">
-            Monitorly détecte proactivement les incidents pour que vous puissiez vous concentrer sur l'essentiel.
-        </p>
-        <button
-            class="bg-[#00C2A8] text-black px-6 py-3 rounded-lg font-bold hover:scale-105 transition-transform duration-300 mx-auto">
-            Démarrer gratuitement
-        </button>
-</section>
+    <!-- Hero Section with Performance -->
+    <section class="h-screen bg-gray-950 relative overflow-hidden px-6 md:px-20 pt-16 pb-20">
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-800/30 via-transparent to-gray-700/20"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 h-full flex flex-col justify-center">
+            <!-- Main Hero Content -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+                <div class="text-center lg:text-left">
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6 text-white fade-in-up">
+                        Server Monitoring Made <span class="text-[#00C2A8]">Simple</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg md:text-xl mb-8 fade-in-up" style="animation-delay: 0.2s;">
+                        Real-time server monitoring, alerts, and analytics to keep your infrastructure running smoothly 24/7.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start fade-in-up" style="animation-delay: 0.4s;">
+                        <button class="bg-[#00C2A8] text-black px-6 py-3 rounded-lg font-bold hover:scale-105 transition-transform duration-300">
+                            Start Free Trial
+                        </button>
+                        <button class="border border-[#00C2A8] text-[#00C2A8] px-6 py-3 rounded-lg font-bold hover:bg-[#00C2A8] hover:text-black transition-colors duration-300">
+                            Watch Demo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dashboard -->
+                <div class="flex justify-center lg:justify-end fade-in-up" style="animation-delay: 0.8s;">
+                    <div class="dashboard-card w-full max-w-lg">
+                        <div class="flex items-center mb-4 pb-3 border-b border-gray-200">
+                            <div class="w-4 h-4 bg-gray-600 rounded-sm mr-3 flex items-center justify-center">
+                                <div class="w-2 h-2 bg-white rounded-sm"></div>
+                            </div>
+                            <h3 class="font-medium text-gray-700 text-sm">Server Status Dashboard</h3>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between py-2">
+                                <div class="flex items-center">
+                                    <span class="status-indicator status-green mr-3"></span>
+                                    <span class="text-gray-700 font-medium text-sm">Web Server</span>
+                                </div>
+                                <span class="text-gray-500 text-sm">99.99% uptime</span>
+                            </div>
+
+                            <div class="flex items-center justify-between py-2">
+                                <div class="flex items-center">
+                                    <span class="status-indicator status-green mr-3"></span>
+                                    <span class="text-gray-700 font-medium text-sm">Database Server</span>
+                                </div>
+                                <span class="text-gray-500 text-sm">99.98% uptime</span>
+                            </div>
+
+                            <div class="flex items-center justify-between py-2">
+                                <div class="flex items-center">
+                                    <span class="status-indicator status-yellow mr-3"></span>
+                                    <span class="text-gray-700 font-medium text-sm">API Gateway</span>
+                                </div>
+                                <span class="text-gray-500 text-sm">CPU: 78%</span>
+                            </div>
+
+                            <div class="flex items-center justify-between py-2">
+                                <div class="flex items-center">
+                                    <span class="status-indicator status-green mr-3"></span>
+                                    <span class="text-gray-700 font-medium text-sm">Cache Server</span>
+                                </div>
+                                <span class="text-gray-500 text-sm">Memory: 42%</span>
+                            </div>
+
+                            <div class="flex items-center justify-between py-2">
+                                <div class="flex items-center">
+                                    <span class="status-indicator status-red mr-3"></span>
+                                    <span class="text-gray-700 font-medium text-sm">Backup Server</span>
+                                </div>
+                                <span class="text-gray-500 text-sm">Disk: 92%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Stats -->
+            <div class="text-center mb-12 fade-up">
+                <p class="text-2xl sm:text-3xl font-semibold tracking-tight text-white max-w-3xl mx-auto">
+                    Des performances qui parlent d'elles-mêmes
+                </p>              
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-up" style="animation-delay: 0.3s;">
+                <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-6 text-center hover:border-[#00C2A8]/50 transition-all duration-300 backdrop-blur-sm">
+                    <div class="text-3xl md:text-4xl font-extrabold text-[#00C2A8] mb-3">12,547</div>
+                    <div class="text-white text-base font-medium mb-1">Machines surveillées</div>
+                    <div class="text-gray-400 text-xs">Across 150+ countries</div>
+                </div>
+                
+                <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-6 text-center hover:border-[#00C2A8]/50 transition-all duration-300 backdrop-blur-sm">
+                    <div class="text-3xl md:text-4xl font-extrabold text-[#00C2A8] mb-3">847M</div>
+                    <div class="text-white text-base font-medium mb-1">Métriques collectées</div>
+                    <div class="text-gray-400 text-xs">Par mois en moyenne</div>
+                </div>
+                
+                <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-6 text-center hover:border-[#00C2A8]/50 transition-all duration-300 backdrop-blur-sm">
+                    <div class="text-3xl md:text-4xl font-extrabold text-[#00C2A8] mb-3">2.4M</div>
+                    <div class="text-white text-base font-medium mb-1">Notifications envoyées</div>
+                    <div class="text-gray-400 text-xs">Alertes traitées cette année</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Animation observer for performance section
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = entry.target.dataset.delay || '0s';
+                    entry.target.classList.add('fade-up');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+
 
   <!-- Bento Grid Section -->
 <section class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 relative overflow-hidden flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-20 py-8 sm:py-12 fade-up">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent from-70% via-gray-900/10 to-gray-950/40"></div>
     
     <div class="mx-auto max-w-2xl lg:max-w-7xl relative z-10 text-center w-full">
-        <h2 class="text-base/7 font-semibold text-[#00C2A8]">Déployez plus vite</h2>
-        <p class="mt-2 mx-auto text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-white">Tout ce dont vous avez besoin pour surveiller vos serveurs</p>
+        <h2 class="text-base/7 font-semibold text-[#00C2A8]">Powerful Monitoring Features</h2>
+        <p class="mt-2 mx-auto text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-white">Everything you need to keep your servers running at peak performance.</p>
         <div class="mt-8 sm:mt-12 lg:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4">
   
         <div class="relative sm:col-span-2 lg:col-span-3">
@@ -455,35 +340,6 @@ document.querySelectorAll('#mobile-menu a').forEach(link => {
 <!-- Section features -->
 <section class="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900 relative overflow-hidden flex items-center justify-center px-6 md:px-20 py-12 fade-up">
     <div class="absolute inset-0 bg-gradient-to-b from-gray-950/40 to-transparent to-70%"></div>
-         
-    <div class="max-w-7xl mx-auto relative z-10 w-full">
-
-        <div class="text-center mb-16 fade-up">
-            <h2 class="text-base/7 font-semibold text-[#00C2A8] mb-4">Performance</h2>
-            <p class="text-4xl sm:text-5xl font-semibold tracking-tight text-white max-w-4xl mx-auto mb-6 whitespace-nowrap">
-                Des performances qui parlent d'elles-mêmes
-              </p>              
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 fade-up">
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 text-center hover:border-[#00C2A8] transition-all duration-300">
-                <div class="text-5xl md:text-6xl font-extrabold text-[#00C2A8] mb-4">12,547</div>
-                <div class="text-white text-lg font-medium mb-2">Machines surveillées</div>
-                <div class="text-gray-400 text-sm">Across 150+ countries</div>
-            </div>
-            
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 text-center hover:border-[#00C2A8] transition-all duration-300">
-                <div class="text-5xl md:text-6xl font-extrabold text-[#00C2A8] mb-4">847M</div>
-                <div class="text-white text-lg font-medium mb-2">Métriques collectées</div>
-                <div class="text-gray-400 text-sm">Par mois en moyenne</div>
-            </div>
-            
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 text-center hover:border-[#00C2A8] transition-all duration-300">
-                <div class="text-5xl md:text-6xl font-extrabold text-[#00C2A8] mb-4">2.4M</div>
-                <div class="text-white text-lg font-medium mb-2">Notifications envoyées</div>
-                <div class="text-gray-400 text-sm">Alertes traitées cette année</div>
-            </div>
-        </div>
 
         <div class="text-center mb-12 fade-up">
             <h2 class="text-base/7 font-semibold text-[#00C2A8] mb-4">Fonctionnalités</h2>
